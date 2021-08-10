@@ -1,0 +1,8 @@
+.date{
+    display:flex;
+    margin-bottom: 0px;
+    text-shadow: lawngreen;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-style: bold;
+    font-size: 20px;
+  }

@@ -5,7 +5,7 @@ import { saveTodo, } from '../features/todoSlice'
 
 const Input = () => {
 
-    const [input, setInput] = useState('')
+    var [input, setInput] = useState('')
     const dispatch=useDispatch()  //Use dispatch for saveTodo reducer from import
     
     const addTodo = () => {
@@ -16,15 +16,24 @@ const Input = () => {
             done: false,
             id: Date.now(),
         }))
+        setInput('')
     }
 
 
 
     return (
-        <div className='input'>
-            <input type="text" value={input} onChange={e => setInput(e.target.value)} />
-            <button onClick={addTodo}> Add! </button>
+        <div className="container">
+            
+        <input type="text" value={input} onChange={e => setInput(e.target.value)} />
+         
+         <button className="buttonAdd" onClick={addTodo}> Add! </button>
+           
         </div>
+
+
+               
+       
+      
     )
 }
 
