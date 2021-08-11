@@ -6,6 +6,7 @@ import { useSelector } from 'react-redux';
 import { selectTodoList } from './features/todoSlice';
 
 import Header from './components/header';
+import { bindActionCreators } from 'redux';
 
 
 function App() {
@@ -25,11 +26,13 @@ function App() {
           <div className="app_todoContainer">
            
               {
-               todoList.map((item) => (   
+               todoList.map((item) =>
+                <TodoItem key={item.id} name={item.item} done={item.done} id={item.id} />  
                
-               <TodoItem key={item.id} name={item.item} done={item.done} id={item.id} />  
+               
+      
                                  
-              ))} 
+              )} 
             
 
           </div>

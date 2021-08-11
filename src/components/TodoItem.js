@@ -23,11 +23,18 @@ const TodoItem = ({name,done,id}) => {
     }
 
     const handleEdit=() => {
-        console.log(NAME)
-        if(NAME===" "){
-            console.log("cannot edit")
+       
+        if(NAME===""){
+            alert("You can not leave input field empty!")
+
         }
-        dispatch(editTodo(NAME,id))
+        else{
+            dispatch(editTodo({
+                NAME:NAME,
+                id:id,
+            }))
+        }
+        
     } 
    
     return (
@@ -42,7 +49,7 @@ const TodoItem = ({name,done,id}) => {
         {true? <input type="text" value={NAME} onChange={ (e) => setName(e.target.value)}/> :  <p className={done ? 'todoItem--done' : null}  >{NAME}</p> }
       
          
-        <button onClick = {handleEdit}  >Edit</button>
+        <Button onClick = {handleEdit} color="secondary" >  <h6> Edit  </h6>  </Button>
 
             <div className='delete'>         
             <Button

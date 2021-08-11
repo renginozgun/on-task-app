@@ -21,7 +21,9 @@ const todoSlice = createSlice({
        },   
        
        editTodo: (state,action) => {
-       // console.log(state.todoList)
+        console.log(action.payload)
+       
+        console.log(action.payload.NAME)
             state.todoList.map(item=> {
 
             if(action.payload.id===item.id){
