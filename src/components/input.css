@@ -9,11 +9,23 @@
     align-items: center;
     margin-right: 30px;
 } */
+
 .container{
     display:flex;
     justify-content: center;
     align-items: center;
     width:90%;
+    
+}
+.textInput{
+    border:none;
+    border-radius: 10px;
+    justify-content: right;
+    width: 80%;
+    height: 35px;
+    margin-right: 5px;
+    text-align: center;
+   
 }
 input{
     background: white;
@@ -22,7 +34,8 @@ input{
     justify-content: right;
     width: 80%;
     height: 35px;
-    text-align: center;
+    margin-right: 5px;
+    text-align: left;
 } 
 input:focus{
     outline:none;
@@ -45,7 +58,9 @@ button{
 .buttonAdd{
     height: 30px;
     width: 65px;
-    margin-left: 5px;
+    margin-left: 10px;
     text-align: match-parent;
+    margin-bottom: 10px;
+    
     
 }

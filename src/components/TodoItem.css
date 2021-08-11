@@ -15,3 +15,18 @@ border-radius:12px ;
 .todoItem--done{
     text-decoration:line-through;
 }
+
+.deleteButton{
+    padding-left: 50px;
+    height: 25px;
+    
+}
+textarea{
+    border:none;
+    width: 50%;
+}
+.delete{
+margin-right: 50px;
+width: 20px;
+text-align: center;
+}

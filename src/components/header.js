@@ -21,8 +21,6 @@ var dict= {
 var date=(props.datestring)
 date= date.split('/')
 
-console.log(dict[date[0]])
-
     return (
         <div className="date">
         <p> {dict[date[0]]} {date[1]} of {date[2]}</p>

@@ -2,21 +2,34 @@ import React from 'react'
 import Checkbox from '@material-ui/core/Checkbox';
 import './TodoItem.css'
 import { useDispatch } from 'react-redux'
-import {setCheck} from '../features/todoSlice'
+import {editTodo, setCheck} from '../features/todoSlice'
 import {deleteTodo} from '../features/todoSlice'
-
+import {useState} from 'react';
+import Button from '@material-ui/core/Button';
 const TodoItem = ({name,done,id}) => {
 
+    
+    const[NAME, setName]=useState(name)
+    
+    var editable=false
     const dispatch=useDispatch()
-
     const handleCheck=()=>{
         dispatch(setCheck(id))
     }
 
-    const deleteTodos=()=> {
-        dispatch(deleteTodo(id))
+    const deleteTodos=()=> {  
+        dispatch(deleteTodo({id}))
+        console.log("burası delete")
     }
 
+    const handleEdit=() => {
+        console.log(NAME)
+        if(NAME===" "){
+            console.log("cannot edit")
+        }
+        dispatch(editTodo(NAME,id))
+    } 
+   
     return (
         <div className='todoItem'>
         <Checkbox
@@ -24,10 +37,35 @@ const TodoItem = ({name,done,id}) => {
         color="primary"
         onChange={handleCheck}
         inputProps={{ 'aria-label': 'primary checkbox' }} />
-            <p className={done && 'todoItem--done'}>{name}</p>
-            <button onChange={deleteTodos}> delete </button>
+
+
+        {true? <input type="text" value={NAME} onChange={ (e) => setName(e.target.value)}/> :  <p className={done ? 'todoItem--done' : null}  >{NAME}</p> }
+      
+         
+        <button onClick = {handleEdit}  >Edit</button>
+
+            <div className='delete'>         
+            <Button
+                variant="contained"
+                color="secondary"
+                className="deleteButton"
+                onClick={deleteTodos}
+                //startIcon={<DeleteIcon />}               
+            >  
+            <h6> Delete </h6>
+            </Button>
+         
+            </div>         
+
         </div>
     )
 }
 
 export default TodoItem
+
+
+
+ /*    */
+
+
+/*  <input key= {id} ref={inputRef} disabled={inputRef} defaultValue={name} className={done ? 'todoItem--done' : null}  />  */

@@ -2,6 +2,8 @@ import React, { useState } from 'react'
 import './input.css'
 import { useDispatch } from 'react-redux'
 import { saveTodo, } from '../features/todoSlice'
+import Button from '@material-ui/core/Button';
+import TextField from '@material-ui/core/TextField';
 
 const Input = () => {
 
@@ -16,17 +18,26 @@ const Input = () => {
             done: false,
             id: Date.now(),
         }))
-        setInput('')
+       setInput('')
     }
 
 
 
     return (
         <div className="container">
-            
-        <input type="text" value={input} onChange={e => setInput(e.target.value)} />
-         
-         <button className="buttonAdd" onClick={addTodo}> Add! </button>
+        <TextField  label="Add ToDo" type="text" className="textInput" value={input} onChange={e => setInput(e.target.value)}/>
+       {/*  <input type="text" value={input} onChange={e => setInput(e.target.value)} /> */}
+        <Button
+                variant="contained"
+                color="primary"
+                className="buttonAdd"
+                onClick={addTodo}
+                //startIcon={<DeleteIcon />}
+                
+            >
+            <h6> Add </h6>
+       </Button> 
+        {/* <button className="buttonAdd" onClick={addTodo}> Add! </button> */}
            
         </div>
 
