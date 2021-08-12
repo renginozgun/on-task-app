@@ -25,3 +25,8 @@
   flex-direction:column;
   align-items: center ;
 }
+
+.todo{
+  margin-right: -80px;
+  width:90%;
+}
