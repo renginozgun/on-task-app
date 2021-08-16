@@ -14,7 +14,8 @@ const TodoItem = ({name,done,id}) => {
     const[NAME, setName]=useState(name)
     const [editMode, setEditMode]=useState(false)
     const [isEmpty, raiseError]=useState(false)
-    
+    const [prevName, setprevName]=useState()
+  
     const dispatch=useDispatch()
     const handleCheck=()=>{
         dispatch(setCheck(id))
@@ -27,14 +28,16 @@ const TodoItem = ({name,done,id}) => {
     }
 
     const handleEdit=() => {
+        setprevName(NAME)
         setEditMode(true)
     } 
     const handleCancel=()=>{
-        setName(NAME)
+        setName(prevName)
         setEditMode(false)
         
     }
     const handleSave=()=>{
+        setprevName(NAME)
         if(NAME===""){
             raiseError(true)
         }
