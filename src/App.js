@@ -47,11 +47,14 @@ const renderCheckbox=()=>{
 
 //LISTS -----------------------------------------------------------------
 const renderLists=()=>{
-  
-    if(checkedOne===true){return todoList.map((item) => item.done &&  <TodoItem key={item.id} name={item.item} done={item.done} id={item.id} />)
-    }if(checked2===true){return todoList.map((item) => !item.done &&  <TodoItem key={item.id} name={item.item} done={item.done} id={item.id} />)}
-    if(checked3===true){ return  todoList.map((item) => <TodoItem key={item.id} name={item.item} done={item.done} id={item.id} />) }
 
+  let returnList = null;
+  
+    if(checkedOne){returnList = todoList.map((item) => item.done &&  <TodoItem key={item.id} name={item.item} done={item.done} id={item.id} />)}
+    else if(checked2){returnList = todoList.map((item) => !item.done &&  <TodoItem key={item.id} name={item.item} done={item.done} id={item.id} />)}
+    else if(checked3){returnList =  todoList.map((item) => <TodoItem key={item.id} name={item.item} done={item.done} id={item.id} />) }
+
+    return returnList;
 }
 //----------------------------------------------------------------LISTS
 

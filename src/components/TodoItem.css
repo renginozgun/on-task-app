@@ -25,6 +25,7 @@ border-radius:12px ;
 .styleButton{
     padding-left: 50px;
     height: 25px;
+    width: 30px;
     
 }
 
@@ -39,4 +40,13 @@ text-align: center;
 }
 .inputArea{
     width:254px;
+}
+.buttonContainer{
+    display: flex;
+    align-items: strecth;
+    margin-right: 9px;
+}
+
+.buttonContainer>*:first-child {
+    margin-right: 5px;
 }

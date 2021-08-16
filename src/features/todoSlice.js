@@ -44,15 +44,15 @@ const todoSlice = createSlice({
             
             // eslint-disable-next-line
             state.todoList.map(item=>{ //iterate thru the list
-                    if(action.payload.id===item.id){
-                        if(item.done===true){
+                    if(action.payload===item.id){
+                        if(item.done){
                             item.done=false
                         } else{
                             item.done=true
                         }
                     }
-                    localStorage.removeItem(action.payload.id);
-                    localStorage.setItem(action.payload.id, JSON.stringify(action.payload) )
+                  localStorage.removeItem(action.payload)
+                    localStorage.setItem(action.payload, JSON.stringify(action.payload) ) 
             })
 
         }

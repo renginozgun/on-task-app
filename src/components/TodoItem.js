@@ -17,7 +17,8 @@ const TodoItem = ({name,done,id}) => {
     
     const dispatch=useDispatch()
     const handleCheck=()=>{
-        dispatch(setCheck({id:id,item:name,done:done}))
+        dispatch(setCheck(id))
+        
     }
 
     const deleteTodos=()=> {  
@@ -47,11 +48,18 @@ const TodoItem = ({name,done,id}) => {
     }
    const renderButtons=()=>{
    
-    if(editMode===false){
-     return <ButtonGroup size="small"><Button className="styleButton" onClick = {handleEdit} color="secondary"> <h6>Edit </h6></Button> 
-     <Button variant="contained" color="secondary"  className="styleButton" onClick={deleteTodos}> <h6> Delete</h6></Button> </ButtonGroup>  }
-    else{ return <ButtonGroup  size="small"><Button className="styleButton" color="primary" onClick={handleSave}> <h6> Save</h6></Button> 
-    <Button variant="contained" color="secondary" className="styleButton" onClick={handleCancel}> <h6>Cancel </h6></Button> </ButtonGroup>
+    if(editMode===false)
+    {
+        return (
+            <div className="buttonContainer">
+                <Button variant="contained" className="styleButton" onClick = {handleEdit} color="secondary"> <h6>Edit </h6></Button> 
+                <Button variant="contained" color="primary" className="styleButton"  onClick={deleteTodos}> <h6> Delete</h6></Button> 
+            </div> )  
+        }
+    
+    else{ 
+        return <ButtonGroup  size="large"><Button className="styleButton" color="primary" onClick={handleSave}> <h6> Save</h6></Button> 
+        <Button variant="contained" color="secondary" className="styleButton" onClick={handleCancel}> <h6>Cancel </h6></Button> </ButtonGroup>
     }   
 }
 
