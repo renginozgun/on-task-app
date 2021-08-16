@@ -13,22 +13,28 @@ const todoSlice = createSlice({
     reducers: {
         saveTodo: (state,action)=>{
             state.todoList.push(action.payload)
+            localStorage.setItem(action.payload.id, JSON.stringify(action.payload))
             
         },
 
        deleteTodo: (state,action) => {
            state.todoList = state.todoList.filter((item) => action.payload.id !== item.id)
+           localStorage.removeItem(action.payload.id)
        },   
        
        editTodo: (state,action) => {
         console.log(action.payload)
        
         console.log(action.payload.NAME)
+        
+
+         //eslint-disable-next-line
             state.todoList.map(item=> {
 
             if(action.payload.id===item.id){
+                localStorage.removeItem(action.payload.id)
                 item.item=action.payload.NAME;
-                
+                localStorage.setItem(action.payload.id, JSON.stringify(action.payload))
             }
                 
 
@@ -38,13 +44,15 @@ const todoSlice = createSlice({
             
             // eslint-disable-next-line
             state.todoList.map(item=>{ //iterate thru the list
-                    if(action.payload===item.id){
+                    if(action.payload.id===item.id){
                         if(item.done===true){
                             item.done=false
                         } else{
                             item.done=true
                         }
                     }
+                    localStorage.removeItem(action.payload.id);
+                    localStorage.setItem(action.payload.id, JSON.stringify(action.payload) )
             })
 
         }

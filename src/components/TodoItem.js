@@ -6,73 +6,68 @@ import {editTodo, setCheck} from '../features/todoSlice'
 import {deleteTodo} from '../features/todoSlice'
 import {useState} from 'react';
 import Button from '@material-ui/core/Button';
+import ButtonGroup from '@material-ui/core/ButtonGroup';
+import Alert from '@material-ui/lab/Alert';
 const TodoItem = ({name,done,id}) => {
 
     
     const[NAME, setName]=useState(name)
+    const [editMode, setEditMode]=useState(false)
+    const [isEmpty, raiseError]=useState(false)
     
-    var editable=false
     const dispatch=useDispatch()
     const handleCheck=()=>{
-        dispatch(setCheck(id))
+        dispatch(setCheck({id:id,item:name,done:done}))
     }
 
     const deleteTodos=()=> {  
         dispatch(deleteTodo({id}))
-        console.log("burası delete")
+        
     }
 
     const handleEdit=() => {
-       
+        setEditMode(true)
+    } 
+    const handleCancel=()=>{
+        setEditMode(false)
+    }
+    const handleSave=()=>{
         if(NAME===""){
-            alert("You can not leave input field empty!")
-
+            raiseError(true)
         }
         else{
+            raiseError(false)
+            setEditMode(false)
             dispatch(editTodo({
-                NAME:NAME,
+                item:NAME,
                 id:id,
+                done:done,
             }))
         }
-        
-    } 
+    }
+   const renderButtons=()=>{
    
+    if(editMode===false){
+     return <ButtonGroup size="small"><Button className="styleButton" onClick = {handleEdit} color="secondary"> <h6>Edit </h6></Button> 
+     <Button variant="contained" color="secondary"  className="styleButton" onClick={deleteTodos}> <h6> Delete</h6></Button> </ButtonGroup>  }
+    else{ return <ButtonGroup  size="small"><Button className="styleButton" color="primary" onClick={handleSave}> <h6> Save</h6></Button> 
+    <Button variant="contained" color="secondary" className="styleButton" onClick={handleCancel}> <h6>Cancel </h6></Button> </ButtonGroup>
+    }   
+}
+
     return (
-        <div className='todoItem'>
-        <Checkbox
-        checked={done}
-        color="primary"
-        onChange={handleCheck}
-        inputProps={{ 'aria-label': 'primary checkbox' }} />
+        <div>
+            <div className='todoItem'>
+                <Checkbox checked={done} color="primary" onChange={handleCheck} inputProps={{ 'aria-label': 'primary checkbox' }} />
+                {editMode ? <input type="text" className="inputArea" value={NAME} onChange={(e) => setName(e.target.value)} /> : <p className={done ? 'todoItem--done' : null}  >{NAME}</p>}
+                {renderButtons()}
 
-
-        {true? <input type="text" value={NAME} onChange={ (e) => setName(e.target.value)}/> :  <p className={done ? 'todoItem--done' : null}  >{NAME}</p> }
-      
-         
-        <Button onClick = {handleEdit} color="secondary" >  <h6> Edit  </h6>  </Button>
-
-            <div className='delete'>         
-            <Button
-                variant="contained"
-                color="secondary"
-                className="deleteButton"
-                onClick={deleteTodos}
-                //startIcon={<DeleteIcon />}               
-            >  
-            <h6> Delete </h6>
-            </Button>
-         
-            </div>         
-
+            </div>
+            {isEmpty && <Alert className="alert" severity="error" size="small">You can not leave the space empty!</Alert>}
         </div>
+
     )
 }
 
 export default TodoItem
 
-
-
- /*    */
-
-
-/*  <input key= {id} ref={inputRef} disabled={inputRef} defaultValue={name} className={done ? 'todoItem--done' : null}  />  */

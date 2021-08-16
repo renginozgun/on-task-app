@@ -18,6 +18,7 @@ const Input = () => {
             done: false,
             id: Date.now(),
         }))
+       // localStorage.setItem('todoList', input, false, Date.now())
        setInput('')
     }
 
