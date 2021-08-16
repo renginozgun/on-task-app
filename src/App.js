@@ -8,7 +8,9 @@ import { useState } from 'react';
 import Header from './components/header'
 import FormGroup from '@material-ui/core/FormGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Checkbox from '@material-ui/core/Checkbox';
+
+import Select from '@material-ui/core/Select';
+import InputLabel from '@material-ui/core/InputLabel';
 
 function App() {
   const todoList = useSelector(selectTodoList)
@@ -16,29 +18,26 @@ function App() {
   const state = { date: new Date() }   
   
 // CHECKBOX --------------------------------------------------------------
-const [checkedOne, setChecked] = useState(false);
-const [checked2, setChecked2] = useState(false);
-const [checked3, setChecked3] = useState(true);
-const handleChange = (event) => {
-  setChecked(event.target.checked);
-  setChecked3(false);
-  setChecked2(false);
-};
-const handleChange2 = (event) => {
-  setChecked2(event.target.checked);
-  setChecked(false);
-  setChecked3(false);
-};
-const handleChange3 = (event) => {
-  setChecked3(event.target.checked);
-  setChecked2(false);
-  setChecked(false);
-};
+const [select, setSelect] = useState('All');
+
+const handleSelect=(event)=>
+{
+setSelect(event.target.value)
+}
 const renderCheckbox=()=>{
  return <FormGroup row> 
- <FormControlLabel control={<Checkbox checked={checkedOne} onChange={handleChange} /> } label="Finished tasks" /> 
- <FormControlLabel control={<Checkbox checked={checked2} onChange={handleChange2} /> } label="Unfinished tasks" /> 
- <FormControlLabel control={<Checkbox checked={checked3} onChange={handleChange3} /> } label="All tasks" /> 
+
+<InputLabel>Task Type</InputLabel>
+        <Select
+          native
+          value={state.age}
+          onChange={handleSelect}
+        >
+          <option aria-label="None" value="" />
+          <option value={'Finished'}>Finished</option>
+          <option value={'Unfinished'}>Unfinished</option>
+          <option value={'All'}>All</option>
+        </Select>
 
   </FormGroup>
 }
@@ -50,9 +49,9 @@ const renderLists=()=>{
 
   let returnList = null;
   
-    if(checkedOne){returnList = todoList.map((item) => item.done &&  <TodoItem key={item.id} name={item.item} done={item.done} id={item.id} />)}
-    else if(checked2){returnList = todoList.map((item) => !item.done &&  <TodoItem key={item.id} name={item.item} done={item.done} id={item.id} />)}
-    else if(checked3){returnList =  todoList.map((item) => <TodoItem key={item.id} name={item.item} done={item.done} id={item.id} />) }
+    if(select==='Finished'){returnList = todoList.map((item) => item.done &&  <TodoItem key={item.id} name={item.item} done={item.done} id={item.id} />)}
+    else if(select==='Unfinished'){returnList = todoList.map((item) => !item.done &&  <TodoItem key={item.id} name={item.item} done={item.done} id={item.id} />)}
+    else if(select==='All'){returnList =  todoList.map((item) => <TodoItem key={item.id} name={item.item} done={item.done} id={item.id} />) }
 
     return returnList;
 }

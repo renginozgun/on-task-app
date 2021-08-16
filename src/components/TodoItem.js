@@ -6,8 +6,8 @@ import {editTodo, setCheck} from '../features/todoSlice'
 import {deleteTodo} from '../features/todoSlice'
 import {useState} from 'react';
 import Button from '@material-ui/core/Button';
-import ButtonGroup from '@material-ui/core/ButtonGroup';
 import Alert from '@material-ui/lab/Alert';
+import SelectInput from '@material-ui/core/Select/SelectInput';
 const TodoItem = ({name,done,id}) => {
 
     
@@ -30,7 +30,9 @@ const TodoItem = ({name,done,id}) => {
         setEditMode(true)
     } 
     const handleCancel=()=>{
+        setName(NAME)
         setEditMode(false)
+        
     }
     const handleSave=()=>{
         if(NAME===""){
@@ -58,8 +60,13 @@ const TodoItem = ({name,done,id}) => {
         }
     
     else{ 
-        return <ButtonGroup  size="large"><Button className="styleButton" color="primary" onClick={handleSave}> <h6> Save</h6></Button> 
-        <Button variant="contained" color="secondary" className="styleButton" onClick={handleCancel}> <h6>Cancel </h6></Button> </ButtonGroup>
+
+        return (
+            <div className="buttonContainer">
+                <Button variant="contained" className="styleButton" onClick = {handleSave}> <h6> Save</h6></Button> 
+                <Button variant="contained" color="primary" className="styleButton"  onClick={handleCancel}> <h6>Cancel </h6></Button> 
+            </div> )
+ 
     }   
 }
 
