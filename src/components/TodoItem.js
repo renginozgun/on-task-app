@@ -7,7 +7,6 @@ import {deleteTodo} from '../features/todoSlice'
 import {useState} from 'react';
 import Button from '@material-ui/core/Button';
 import Alert from '@material-ui/lab/Alert';
-import SelectInput from '@material-ui/core/Select/SelectInput';
 const TodoItem = ({name,done,id}) => {
 
     
@@ -18,23 +17,19 @@ const TodoItem = ({name,done,id}) => {
   
     const dispatch=useDispatch()
     const handleCheck=()=>{
-        dispatch(setCheck(id))
-        
+        dispatch(setCheck({id}))      
     }
 
     const deleteTodos=()=> {  
-        dispatch(deleteTodo({id}))
-        
+        dispatch(deleteTodo({id}))       
     }
-
     const handleEdit=() => {
         setprevName(NAME)
         setEditMode(true)
     } 
     const handleCancel=()=>{
         setName(prevName)
-        setEditMode(false)
-        
+        setEditMode(false)       
     }
     const handleSave=()=>{
         setprevName(NAME)
@@ -49,10 +44,17 @@ const TodoItem = ({name,done,id}) => {
                 id:id,
                 done:done,
             }))
+
+       /*      editTodo({
+                item:NAME,
+                id:id,
+                done:done,
+            }) */
+
         }
     }
    const renderButtons=()=>{
-   
+                                          
     if(editMode===false)
     {
         return (
@@ -61,7 +63,7 @@ const TodoItem = ({name,done,id}) => {
                 <Button variant="contained" color="primary" className="styleButton"  onClick={deleteTodos}> <h6> Delete</h6></Button> 
             </div> )  
         }
-    
+                                  
     else{ 
 
         return (
